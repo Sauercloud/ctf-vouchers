@@ -21,7 +21,7 @@ export default function AboutPage() {
                 community.
               </p>
               <p className="mt-2">
-                If youre team has orgainized or participated in atleast one CTF
+                If your team has organized or participated in at least one CTF
                 your team is eligible.
               </p>
             </section>
@@ -38,11 +38,11 @@ export default function AboutPage() {
               </p>
               <p className="mt-2">
                 The number of tickets you request will not be the number of
-                ticktes you receive. It is mereley a reference and a maximum
+                ticktes you receive. It is merely a reference and a maximum
                 which we can share with the CCC if needed.
               </p>
               <p className="mt-2">
-                The specicifc distribution is currently to be determined and
+                The specific distribution is currently to be determined and
                 will be updated.
               </p>
             </section>
