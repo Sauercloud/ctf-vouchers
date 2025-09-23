@@ -1,0 +1,12 @@
+keys:
+  - &admin_felipe FB519CBC730981016A5478A160A17D46CFFB2A45
+  - &admin_daniel DD939AD813A3EACB116A7F4B28244753C35D3D10
+  - &server age14ep6z4vkgr82y0ndzumkppvt59f5seyr6rtfclknq3knfnjp5faqyamss8
+creation_rules:
+  - path_regex: host/secrets.yaml$
+    key_groups:
+      - pgp:
+          - *admin_felipe
+          - *admin_daniel
+        age:
+          - *server
