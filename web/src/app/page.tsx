@@ -27,7 +27,7 @@ export default function Home() {
           </h3>
           <ol className="text-left space-y-3 text-gray-300">
             <li className="flex items-start">
-              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex items-center justify-center font-bold mr-3">
+              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex shrink-0 items-center justify-center font-bold mr-3">
                 1
               </span>
               <p>
@@ -35,13 +35,13 @@ export default function Home() {
               </p>
             </li>
             <li className="flex items-start">
-              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex items-center justify-center font-bold mr-3">
+              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex shrink-0 items-center justify-center font-bold mr-3">
                 2
               </span>
               <p>You will be directed to your team dashboard.</p>
             </li>
             <li className="flex items-start">
-              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex items-center justify-center font-bold mr-3">
+              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex shrink-0 items-center justify-center font-bold mr-3">
                 3
               </span>
               <p>
@@ -50,7 +50,7 @@ export default function Home() {
               </p>
             </li>
             <li className="flex items-start">
-              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex items-center justify-center font-bold mr-3">
+              <span className="bg-cyan-500 text-gray-900 rounded-full h-6 w-6 text-sm flex shrink-0 items-center justify-center font-bold mr-3">
                 4
               </span>
               <p>
