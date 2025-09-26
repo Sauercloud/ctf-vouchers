@@ -4,5 +4,8 @@
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets = {
     vouchers-env = { };
+    grafana_password = {
+      owner = config.systemd.services.grafana.serviceConfig.User;
+    };
   };
 }

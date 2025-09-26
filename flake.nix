@@ -37,6 +37,8 @@
           ./host/postgres.nix
           ./host/nginx.nix
           ./host/vouchers.nix
+          ./host/grafana.nix
+          ./host/prometheus.nix
         ];
       };
       devShells.${system}.default = pkgs.mkShell {
