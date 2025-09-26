@@ -55,7 +55,7 @@ export default function Home() {
               </span>
               <p>
                 You can come back and update this information any time before
-                the deadline.
+                the deadline. (The deadline will be annouced at a later date ;) )
               </p>
             </li>
           </ol>
