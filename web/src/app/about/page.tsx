@@ -42,8 +42,30 @@ export default function AboutPage() {
                 which we can share with the CCC if needed.
               </p>
               <p className="mt-2">
-                The specific distribution is currently to be determined and
-                will be updated.
+                After we receive the vouchers from the 39c3 team, we will begin
+                distributing them to the teams that have registered prior to the
+                deadline. Every day after we received the vouchers, we will go
+                through all of the remaining registered teams and provide teams
+                with two vouchers each that they need to redeem on the same day,
+                while also specifying vorstand@alles.team as the recipient
+                E-Mail of the replicated vouchers. This ensures that the
+                vouchers will get replicated each day so that more CTF teams
+                will have the chance to attend 39c3 - if any team does not
+                follow this rule, they will be banned from any subsequent
+                voucher distributions in the future.
+              </p>
+              <p className="mt-2">
+                The sequence of teams receiving vouchers will be published{" "}
+                <Link
+                  href="/sequence"
+                  className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-1 px-1 rounded-lg transition-colors"
+                >
+                  here
+                </Link>
+                . You will receive a mail with instructions to the mail you
+                provided. Please make sure to but you tickets as soon as
+                possible. Otherwise we may distribute those vouchers again and
+                skip you.
               </p>
             </section>
 

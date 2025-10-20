@@ -55,7 +55,8 @@ export default function Home() {
               </span>
               <p>
                 You can come back and update this information any time before
-                the deadline. (The deadline will be annouced at a later date ;) )
+                the deadline. (The deadline for registration is 20.10. 12 UTC) )
+                You can lower your amount of vouchers needed afterwards.
               </p>
             </li>
           </ol>

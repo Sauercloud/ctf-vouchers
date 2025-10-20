@@ -16,7 +16,8 @@
     "next-auth": "^4.24.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "seedrandom": "^3.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -24,6 +25,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/seedrandom": "^3.0.8",
     "autoprefixer": "^10.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",

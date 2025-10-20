@@ -6,7 +6,12 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { User } from "@/generated/prisma";
 
-export const saveFormRequest = async (tickets: number, contactEmail: string) => {
+const DEADLINE = new Date("2025-10-20T12:00:00");
+
+export const saveFormRequest = async (
+  tickets: number,
+  contactEmail: string
+) => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.name) {
@@ -20,6 +25,17 @@ export const saveFormRequest = async (tickets: number, contactEmail: string) => 
   }
 
   try {
+    const current = await prisma.formResponse.findFirst({
+      where: { teamId },
+    });
+
+    if (
+      new Date() > DEADLINE &&
+      Number(tickets) > (current?.numberOfTickets ?? 0)
+    ) {
+      return { success: false, error: "Deadline" };
+    }
+
     await prisma.formResponse.upsert({
       where: { teamId },
       update: {
@@ -40,4 +56,4 @@ export const saveFormRequest = async (tickets: number, contactEmail: string) => 
     console.error("Failed to save ticket request:", error);
     return { success: false, error: "An error occurred while saving." };
   }
-}
+};

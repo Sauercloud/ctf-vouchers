@@ -23,6 +23,12 @@ export default function Header() {
           >
             About
           </Link>
+          <Link
+            href="/sequence"
+            className="text-gray-300 hover:text-white transition-colors"
+          >
+            Voucher Sequence
+          </Link>
           {status === "authenticated" && (
             <Link
               href="/dashboard"
