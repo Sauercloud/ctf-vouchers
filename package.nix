@@ -7,20 +7,19 @@
   makeWrapper,
   nodejs,
   yarn,
-  openssl,
   prisma-engines,
   ...
 }:
 
 stdenv.mkDerivation (finalAttrs: rec {
   pname = "web";
-  version = "0.0.1";
+  version = "0.2.0";
 
   src = ./web;
 
   yarnOfflineCache = fetchYarnDeps {
     yarnLock = src + "/yarn.lock";
-    hash = "sha256-y7mSvmjcWThAfI7uSaZxt1sVSzJPhjUdQuhbYzbX5n4=";
+    hash = "sha256-XvH/CNCCKI0bx+NGmce5KukdalwIGcaz+Oi1rc/culY=";
   };
 
   nativeBuildInputs = [
@@ -30,10 +29,11 @@ stdenv.mkDerivation (finalAttrs: rec {
     nodejs
   ];
 
-  propagatedBuildInputs = [
-    openssl
-    prisma-engines
-  ];
+  env = {
+    NEXT_TELEMETRY_DISABLED = "1";
+    PRISMA_SCHEMA_ENGINE_BINARY = lib.getExe' prisma-engines "schema-engine";
+    PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = "1";
+  };
 
   installPhase = ''
     runHook preInstall
@@ -41,19 +41,19 @@ stdenv.mkDerivation (finalAttrs: rec {
     mkdir -p $out/web
     cp -r . $out/web/
 
-    ln -s ${lib.getExe' prisma-engines "schema-engine"} $out/web/node_modules/schema-engine-linux-nixos
-
+    # Prisma 7 uses the pg driver adapter at runtime; only migrations need a
+    # native engine, which has to match the prisma version from yarn.lock.
     mkdir -p $out/bin
     makeWrapper ${lib.getExe yarn} $out/bin/web \
       --chdir $out/web \
-      --set PRISMA_QUERY_ENGINE_LIBRARY $out/web/src/generated/prisma/libquery_engine.node \
+      --set NEXT_TELEMETRY_DISABLED 1 \
       --append-flags start
 
     makeWrapper ${lib.getExe yarn} $out/bin/prisma \
       --chdir $out/web \
       --argv0 prisma \
-      --set PRISMA_QUERY_ENGINE_LIBRARY $out/web/src/generated/prisma/libquery_engine.node \
-      --add-flags 'run prisma'
+      --set PRISMA_SCHEMA_ENGINE_BINARY ${lib.getExe' prisma-engines "schema-engine"} \
+      --add-flags '-s prisma'
 
     runHook postInstall
   '';

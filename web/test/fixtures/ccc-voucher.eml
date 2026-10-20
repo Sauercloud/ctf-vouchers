@@ -1,0 +1,271 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cccv.de; s=presale;
+	t=1762204274; bh=69VgekVO06LmJLBKL0lflV0M8jqkLWQbkNO5HHG/cWs=;
+	h=Subject:From:To:Date:Reply-To;
+	b=QidDCUyp0iswpdDb2KCE1i6Xe58+gvkFvgRx3dLKWWdP1bW9b9g5M7gTVhsL7lzcd
+	 Is/O7/WQqCqiZPasl1CVUU23YmEKx3IAL6OUSaRKM+wl0Lqv7uP2dtUZkDCJEH0bUu
+	 9D/ZjbfBZW3zc0SvG+xu2nAUq1ekhSuSZi0IJzkzbHusT9ZU1s4dP+aIdyRFHjam/H
+	 29xThLW+J0owL/Q8AsNGCIi4Ihjp8C0o7WW7/GPXBayfdUOQmFxQ392FHsNpor9wq6
+	 1Wat4Ig9cB3yEuvrObOqZBLtkY/wAODUMafOFRkwt+mwvXPapgptyPzDMahgNHWXHo
+	 plrZDYUtqikcQ==
+Content-Type: multipart/alternative;
+ boundary="===============7801968373158690366=="
+MIME-Version: 1.0
+Subject: [39C3] You received a voucher
+From: 39th Chaos Communication Congress <39c3-tickets@cccv.de>
+To: vorstand@alles.team
+Date: Mon, 03 Nov 2025 21:11:14 -0000
+Message-ID: <176220427420.1542.17835247816070849850@backend>
+X-Auto-Response-Suppress: OOF, NRN, AutoReply, RN
+Auto-Submitted: auto-generated
+Reply-To: 39c3-tickets@cccv.de
+X-DKIM: signer='cccv.de' status='pass' reason=''
+DKIMCheck: Server passes DKIM test, 0 Spam score
+SpamTally: Final spam score: 19
+X-Rspamd-Queue-Id: 1D6012E0542
+X-MBO-SPAM-Probability: 
+X-Rspamd-Score: -5.25 / 15.00 / 15.00
+
+--===============7801968373158690366==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+(Deutsche Version weiter unten.)
+
+Hi there!
+
+Someone has instructed us to send you the following voucher code for the 39C3:
+
+  CHAOSTESTTESTTESTTESTTESTTESTTEST2345
+
+You can use it to buy a ticket for 39C3 here:
+
+  https://tickets.events.ccc.de/39c3/
+
+Please note, that this code does NOT guarantee that you will get a ticket, it
+only allows you to participate in the ticket presale. If the contingent is sold
+out, this voucher will not work any more.
+
+You can find more information here: https://events.ccc.de/congress/2025/infos/tickets.html
+
+Cheers,
+Your 39C3 team
+
+#########################################################################################
+
+Hallo!
+
+jemand hat uns gesagt, dass wir dir den folgenden Gutschein-Code für den 39C3 zukommen
+lassen sollen:
+
+  CHAOSTESTTESTTESTTESTTESTTESTTEST2345
+
+Du kannst ihn hier benutzen, um ein 39C3-Ticket zu kaufen:
+
+  https://tickets.events.ccc.de/39c3/
+
+Bitte beachte, dass dir dieser Code KEIN Ticket garantiert. Er erlaubt dir nur,
+am Presale teilzunehmen. Wenn das Kontingent aufgebraucht ist, funktioniert dein Voucher
+nicht mehr.
+
+Weitere Informationen findest du hier: https://events.ccc.de/congress/2025/infos/tickets.html
+
+Viele Grüße,
+Dein 39C3-Presale-Team
+
+
+-- 
+
+
+--===============7801968373158690366==
+Content-Type: multipart/related;
+ boundary="===============8155192553804849375=="
+MIME-Version: 1.0
+
+--===============8155192553804849375==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!--[if mso]>
+        <style type="text/css">
+        body, table, td {
+            font-family: "Open Sans", "OpenSans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
+        </style>
+    <![endif]-->
+</head>
+<body align="center" style="background-color: #eee;background-position: top;background-repeat: repeat-x;font-family: 'Open Sans', 'OpenSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;line-height: 22px;color: #333;margin: 0;padding-top: 20px;">
+<!--[if gte mso 9]>
+    <table width="100%"><tr><td align="center">
+    <table width="600"><tr><td align="center"
+    <![endif]-->
+<table border="0" cellspacing="0" class="layout" style="width: 100%;max-width: 600px;border-spacing: 0px;border-collapse: separate;margin: auto;" width="600">
+<!--[if !mso]><!-- -->
+<tbody><tr>
+<td style="background-color: white;padding: 0;line-height: 0">
+<img alt="" class="wide" src="cid:image_0" style="width: 100%;height: auto;max-height: 60px"/>
+</td>
+</tr>
+<!--<![endif]-->
+<tr>
+<td align="center" class="header" style="background-color: white;padding: 0 20px;text-align: center;">
+<!--[if gte mso 9]>
+                    <table cellpadding="20"><tr><td align="center">
+                <![endif]-->
+<h2 style="margin-top: 20px;margin-bottom: 10px;font-size: 22px;line-height: 26px;"><a href="https://tickets.events.ccc.de/39c3/" style="color: #000000;font-weight: bold;text-decoration: none;" target="_blank">39th Chaos Communication Congress</a>
+</h2>
+<h1 style="margin-top: 0;margin-bottom: 20px;font-size: 26px;line-height: 30px;">You received a voucher</h1>
+<!--[if gte mso 9]>
+                    </td></tr></table>
+                <![endif]-->
+</td>
+</tr>
+<!--[if !mso]><!-- -->
+<tr>
+<td style="background-color: white;padding: 0;">
+<div style="line-height: 18px;height: 18px;"> </div>
+<img alt="" class="wide" src="cid:image_1" style="width: 100%;height: auto;max-height: 4px"/>
+<div style="line-height: 18px;height: 18px;"> </div>
+</td>
+</tr>
+<!--<![endif]-->
+<!--[if gte mso 9]>
+<tr>
+    <td background="white" style="background-color: white;">
+        <hr background="white" style="background-color: white;"/>
+    </td>
+</tr>
+<![endif]-->
+<tr>
+<td class="containertd" style="background-color: white;padding: 0;">
+<!--[if gte mso 9]>
+                    <table cellpadding="20"><tr><td>
+                <![endif]-->
+<div class="content" style="padding: 0 18px;text-align: left;">
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">(Deutsche Version weiter unten.)</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Hi there!</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Someone has instructed us to send you the following voucher code for the 39C3:</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">CHAOSTESTTESTTESTTESTTESTTESTTEST2345</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">You can use it to buy a ticket for 39C3 here:</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;"><a href="https://tickets.events.ccc.de/39c3/" rel="noopener" style="color: #000000;font-weight: bold;word-wrap: anywhere;word-break: break-all;" target="_blank">https://tickets.events.ccc.de/39c3/</a></p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Please note, that this code does NOT guarantee that you will get a ticket, it
+only allows you to participate in the ticket presale. If the contingent is sold
+out, this voucher will not work any more.</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">You can find more information here: <a href="https://events.ccc.de/congress/2025/infos/tickets.html" rel="noopener" style="color: #000000;font-weight: bold;word-wrap: anywhere;word-break: break-all;" target="_blank">https://events.ccc.de/congress/2025/infos/tickets.html</a></p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Cheers,
+Your 39C3 team</p>
+<h6></h6>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Hallo!</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">jemand hat uns gesagt, dass wir dir den folgenden Gutschein-Code für den 39C3 zukommen
+lassen sollen:</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">CHAOSTESTTESTTESTTESTTESTTESTTEST2345</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Du kannst ihn hier benutzen, um ein 39C3-Ticket zu kaufen:</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;"><a href="https://tickets.events.ccc.de/39c3/" rel="noopener" style="color: #000000;font-weight: bold;word-wrap: anywhere;word-break: break-all;" target="_blank">https://tickets.events.ccc.de/39c3/</a></p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Bitte beachte, dass dir dieser Code KEIN Ticket garantiert. Er erlaubt dir nur,
+am Presale teilzunehmen. Wenn das Kontingent aufgebraucht ist, funktioniert dein Voucher
+nicht mehr.</p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Weitere Informationen findest du hier: <a href="https://events.ccc.de/congress/2025/infos/tickets.html" rel="noopener" style="color: #000000;font-weight: bold;word-wrap: anywhere;word-break: break-all;" target="_blank">https://events.ccc.de/congress/2025/infos/tickets.html</a></p>
+<p style="margin: 0 0 10px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;-ms-word-break: break-all;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto;hyphens: auto;">Viele Grüße,
+Dein 39C3-Presale-Team</p>
+</div>
+<!--[if gte mso 9]>
+                    </td></tr></table>
+                <![endif]-->
+</td>
+</tr>
+<!--[if !mso]><!-- -->
+<tr>
+<td style="background-color: white;padding: 0;line-height: 0">
+<br/>
+<img alt="" class="wide" src="cid:image_2" style="width: 100%;height: auto;max-height: 60px"/>
+</td>
+</tr>
+<!--<![endif]-->
+</tbody></table>
+<div class="footer" style="padding: 10px;text-align: center;font-size: 12px;">
+        
+
+    powered by <a href="https://pretix.eu" style="color: #000000;font-weight: bold;" target="blank">pretix</a>
+</div>
+<br/>
+<br/>
+<!--[if gte mso 9]>
+    </td></tr></table>
+    </td></tr></table>
+    <![endif]-->
+</body></html>
+--===============8155192553804849375==
+Content-Type: image/png
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-ID: <image_0>
+Content-Disposition: inline;
+ filename="image_0.png"
+
+iVBORw0KGgoAAAANSUhEUgAAAlgAAAA8CAAAAACf95tlAAAAAXNCSVQI5gpbmQAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAG/SURBVHja
+7dvRboMwDIXhvf/DLiQQAwkku9+qDgq2hPyfN6j1qTlx06/uMunbLMnnhL98fuzRDtYILEeZ7GBN
+wAIWsIB1LdkOVgaWo4gdLAGWo6x2sFZgOUq1g1WB5SjNDlYDlqcEK1dDB5anmK3eE7C4FnIpBNbV
+FLo7sB7d3huwKFlULGA9pWQJsJxls4G1ActbooWr2IHlLbMFrBlY7rJbwNqBxb2QZ8nAuiUGO9IC
+LOo71R1YN0X9td8KLJ8ZeDEDrAd+Za3A4mLIz4TAujGqv+tUYPmN4v8LcweW3zS1t++hActzCrtR
+YD3pMJQOLOeJ7NyBpZFdoWaFDVjuJ6BRswpTBZbCAn5hpsDq/fbHpDMTBZbC1TAzT2ApyMIVsDRO
+Q2GWwFJo8PR2YP3eOtywzwrsGYD1J9vlHXzcmSKw7q/wU2OEwHpdtALHILA00jJfV8DSaVofvYOP
+lckB658sp/8VNrBkANahqnXqfhhXJgasgymHD8REZwfWmezzga+tQdhcAet0qry1FYV3osD6dP1Q
+JL3YbYUkhfUCsK6einWRPI0pxjROWZbK+QcsAiwCLEKARYBFgEXIu/wAYbjtwujw8KwAAAAASUVO
+RK5CYII=
+--===============8155192553804849375==
+Content-Type: image/png
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-ID: <image_1>
+Content-Disposition: inline;
+ filename="image_1.png"
+
+iVBORw0KGgoAAAANSUhEUgAAAlgAAAAEBAMAAACgm1xKAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9
+kT1Iw0AcxV/TSkUrDu0g4pChOlkQleKoVShChVArtOpgcukXNGlIUlwcBdeCgx+LVQcXZ10dXAVB
+8APExdVJ0UVK/F9aaBHjwXE/3t173L0DhEaFaVZgAtB020wnE2I2tyoGXxFCAP0IIy4zy5iTpBQ8
+x9c9fHy9i/Es73N/jgE1bzHAJxLPMsO0iTeI45u2wXmfOMJKskp8Tjxu0gWJH7mutPiNc9FlgWdG
+zEx6njhCLBa7WOliVjI14mniqKrplC9kW6xy3uKsVWqsfU/+wlBeX1nmOs0RJLGIJUgQoaCGMiqw
+EaNVJ8VCmvYTHv5h1y+RSyFXGYwcC6hCg+z6wf/gd7dWYWqylRRKAD0vjvMxCgR3gWbdcb6PHad5
+AvifgSu94682gJlP0usdLXoEDG4DF9cdTdkDLneAoSdDNmVX8tMUCgXg/Yy+KQeEb4G+tVZv7X2c
+PgAZ6ip1AxwcAmNFyl73eHdvd2//nmn39wNhNnKgJpT5BQAAAC1QTFRF7u7u7+/v8PDw8fHx8vLy
+9PT09fX19/f3+Pj4+fn5+vr6/Pz8/f39/v7+////BLnnfgAAAAlwSFlzAAAOxAAADsQBlSsOGwAA
+AAd0SU1FB+MMBAsUDD3bzUUAAABhSURBVDjLY2BAgLp3CNCAJO6HJH4ASZwXSfwxkjgnkvhzJHFW
+JPHXSOKMSOLvFJAk1iGJJyCJ5yGJL0AS10MSf4Akzo0k/hRJnB1J/CWSOAuS+FsG7GA0sEYDazSw
+BiSwAPzzGpfLqBMlAAAAAElFTkSuQmCC
+--===============8155192553804849375==
+Content-Type: image/png
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-ID: <image_2>
+Content-Disposition: inline;
+ filename="image_2.png"
+
+iVBORw0KGgoAAAANSUhEUgAAAlgAAAA8CAYAAAC6nMS5AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPnSURB
+VHic7d3dbuJIEAbQsg2Ecd7/TQeDf3svVuFmdjJLxsGm+xwJKXcpqS76U3VTVCmlFAAArKbeugAA
+gNwIWAAAKxOwAABWJmABAKxMwAIAWNlh6wIAIiKWZYllWWKe5/vfEREppfsnIqKqqvsnIqKu66jr
+Opqmuf8NsDUBC3i6lFJM0xTjOMY0TbEsS6y1MaaqqqjrOg6HQxyPxzgcDvcwBvAslT1YwDN8BKpx
+HGOe56f+76Zp4ng83gMXwHcTsIBvsyxLDMMQfd/fr/y2Vtd1nE6nOJ1O0TTN1uUAmRKwgNV9hKpp
+mrYu5VOHwyHO53Mcj8etSwEyI2ABqxmGIW6329OvAP9WXddxPp/j7e1t61KATAhYwF/r+z5ut9tu
+rgG/StAC1iJgAV82z3N0Xbf7q8BHNU0Tbdt6EA98mYAFPCylFNfrNfq+37qUb3U6naJtW2segIcJ
+WMBDhmGIrutW21u1d1VVRdu2cTqdti4FeCECFvC/lDK1+h3TLOARAhbwR/M8x+VyeblvB66taZp4
+f3+3Pwv4IwEL+NQ4jnG5XIq5EvyTqqri/f3d7izgUwIW8FvDMMTlctm6jF1q29Y6B+C3BCzgP91u
+t7her1uXsWvn8zl+/PixdRnADglYwC+6riv2Mfuj3t7eom3brcsAdqbeugBgX4Srx/R9H13XbV0G
+sDMCFnB3u92Eqy/4+KkggA8CFhAR/z5o9+bq60reEQb8SsAC7qsY+Dtd18U4jluXAeyAgAWFW5ZF
+uFqRhaxAhIAFxfv586cloitKKVnMCghYULKu60xbvsE8z96zQeEELCjUOI4eZX+jvu+9x4KCCVhQ
+oI9rLL6Xq0Iol4AFBbperw7+J0gpuSqEQglYUJh5nl0NPlHf9zFN09ZlAE8mYEFh/KzL85liQXkE
+LCiIaco2pmmKYRi2LgN4IgELCuL38rZjigVlEbCgEMMwxLIsW5dRrGVZTLGgIAIWFML0ant6AOUQ
+sKAA4zja2L4D8zxbPgqFELCgACYn+6EXUAYBCzK3LItvDu7INE3ewkEBBCzInIfV+6MnkD8BCzLn
+MN8fPYH8CViQsXmePW7fIX2B/AlYkDGTkv3SG8ibgAUZ87h9v/QG8iZgQaZSSg7xHZumKVJKW5cB
+fBMBCzIlXO2fHkG+BCzIlMN7//QI8iVgQaYc3vunR5AvAQsyZQ3A/tnoDvkSsCBDKSUPqF/Asiz6
+BJkSsCBDplevQ68gTwIWZMjV0+vQK8iTgAUZMhV5HXoFeRKwIEPe9bwOvYI8CViQIYf269AryJOA
+BQCwMgELMmQq8jr0CvIkYEGGHNqvQ68gT/8AETAn3pyLgvsAAAAASUVORK5CYII=
+--===============8155192553804849375==--
+
+--===============7801968373158690366==--

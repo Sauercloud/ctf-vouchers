@@ -1,11 +1,13 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { NextAuthOptions } from "next-auth";
-import { prisma } from "@/lib/prisma";
+import type { NextAuthOptions } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { getTeamDetails } from "@/lib/ctftime";
-import { User } from "@/generated/prisma";
+import { prisma } from "@/lib/prisma";
+
+interface CtftimeProfile {
+  team: { id: number; name: string; logo: string };
+}
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     {
       id: "ctftime",
@@ -22,7 +24,7 @@ export const authOptions: NextAuthOptions = {
       client: {
         token_endpoint_auth_method: "client_secret_post",
       },
-      profile(profile) {
+      profile(profile: CtftimeProfile) {
         return {
           id: profile.team.id.toString(),
           name: profile.team.name,
@@ -36,31 +38,29 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ profile }) {
-      if (profile) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const team = await getTeamDetails((profile as any).team.id);
+      const teamId = (profile as CtftimeProfile | undefined)?.team?.id;
+      if (!teamId) return false;
 
-        if (team) {
-          // Check if team has participated in any event
-          const x = Object.values(team.rating).reduce(
-            (values, v) =>
-              values +
-              v.country_place +
-              v.organizer_points +
-              v.rating_place +
-              v.rating_points,
-            0
-          );
-          if (x != 0) {
-            return true
-          }
-        }
-      }
-      return false;
+      const team = await getTeamDetails(teamId);
+      if (!team) return false;
+
+      // Only teams that have participated in at least one event
+      const played = Object.values(team.rating).some(
+        (v) =>
+          v.country_place + v.organizer_points + v.rating_place + v.rating_points !== 0,
+      );
+      if (!played) return false;
+
+      await prisma.team.upsert({
+        where: { id: teamId },
+        update: { name: team.name },
+        create: { id: teamId, name: team.name },
+      });
+      return true;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        (session.user as User).id = token.id as string;
+        session.user.id = token.id as string;
       }
       return session;
     },
@@ -72,3 +72,10 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+
+// CTFtime team id of the logged in team, or null.
+export async function currentTeamId(): Promise<number | null> {
+  const session = await getServerSession(authOptions);
+  const id = Number(session?.user?.id);
+  return Number.isInteger(id) && id > 0 ? id : null;
+}

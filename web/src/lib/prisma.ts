@@ -1,24 +1,19 @@
-import { PrismaClient } from "@/generated/prisma";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@/generated/prisma/client";
 
-// Declare a global variable to hold the Prisma Client instance.
-// This is necessary to avoid creating new connections on every hot reload in development.
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
-// Initialize the Prisma Client.
-// If a global instance already exists, use it; otherwise, create a new one.
-// In production, `globalThis.prisma` will be undefined, so a new client is always created.
-// In development, the existing `globalThis.prisma` is reused across hot reloads.
+// Reuse the client across hot reloads in development.
 export const prisma =
-  globalThis.prisma ||
+  globalThis.prisma ??
   new PrismaClient({
-    log: process.env.NODE_ENV === "development" ? ["query", "info", "warn", "error"] : [],
+    adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
   });
 
-// If we are in a development environment, assign the Prisma Client instance
-// to the global variable to persist it across hot reloads.
 if (process.env.NODE_ENV !== "production") {
   globalThis.prisma = prisma;
 }
 
+export type Tx = Parameters<Parameters<typeof prisma.$transaction>[0]>[0];

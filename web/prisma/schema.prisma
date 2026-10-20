@@ -1,74 +1,155 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
-  output = "../src/generated/prisma"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
-model FormResponse {
-  id              String   @id @default(cuid())
-  numberOfTickets Int
-  contactEmail    String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+// A CTFtime team. Created on first login, or by an admin to pre-ban a team.
+model Team {
+  id           Int       @id // CTFtime team id
+  name         String
+  contactEmail String?
+  requested    Int       @default(0)
+  // Set when the team submits the form for the first time. Teams registered
+  // after the freeze are "late" and appended to every round.
+  registeredAt DateTime?
+  // Request at the freeze, lowered along with `requested`. Only vouchers up
+  // to this keep the team's shuffled place.
+  frozenRequested Int?
+  // Requests after the freeze, `[{ at, upTo }]` in time order (see
+  // lib/order.ts). Each one's vouchers queue at the back of every round.
+  raises       Json      @default("[]")
+  banned       Boolean   @default(false)
+  banReason    String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
-  // Relation to the User/Team
-  teamId String   @unique
-  team   User     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  assignments Assignment[]
 }
 
-
-// --- NextAuth.js Models ---
-// These are required for NextAuth.js with the Prisma adapter.
-
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
+// Singleton row (id = 1) holding the distribution state.
+model State {
+  id            Int       @id @default(1)
+  frozenAt      DateTime?
+  frozenTeamIds Int[]
+  seed          String?
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+enum VoucherSource {
+  SEED
+  REPLICATED
+  MANUAL
 }
 
-model User {
-  id                String    @id @default(cuid())
-  name              String    @unique
-  email             String?   @unique
-  emailVerified     DateTime?
-  image             String?
-  accounts          Account[]
-  sessions          Session[]
-  formResponse FormResponse?
+model Voucher {
+  id         String        @id @default(cuid())
+  code       String        @unique
+  source     VoucherSource
+  // Held vouchers are not distributed until an admin releases them.
+  held       Boolean       @default(false)
+  heldReason String?
+  createdAt  DateTime      @default(now())
+
+  // The assignment whose replication address this voucher arrived at.
+  parentAssignmentId String?
+  parentAssignment   Assignment?  @relation("Replicas", fields: [parentAssignmentId], references: [id])
+  inboundMailId      String?
+  inboundMail        InboundMail? @relation(fields: [inboundMailId], references: [id])
+
+  assignments Assignment[] @relation("VoucherAssignments")
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+// A voucher handed to a team. Replicas arrive at v-<token>@, confirmations at c-<token>@.
+model Assignment {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  round     Int
+  createdAt DateTime @default(now())
 
-  @@unique([identifier, token])
+  voucherId String
+  voucher   Voucher @relation("VoucherAssignments", fields: [voucherId], references: [id])
+  teamId    Int
+  team      Team    @relation(fields: [teamId], references: [id])
+
+  sentAt               DateTime?
+  confirmedAt          DateTime?
+  confirmNote          String?
+  replicatedAt         DateTime?
+  unconfirmedFlaggedAt DateTime?
+  overdueFlaggedAt     DateTime?
+  // Set by "clear flags": the flag timers restart from here.
+  flagsClearedAt       DateTime?
+  revokedAt            DateTime?
+  revokeReason         String?
+  // A refunded revocation no longer counts towards the team's voucher count.
+  slotRefunded         Boolean   @default(false)
+
+  replicas Voucher[]      @relation("Replicas")
+  outbound OutboundMail[]
+
+  @@index([teamId])
+  @@index([voucherId])
+}
+
+enum InboundStatus {
+  PROCESSED
+  UNMATCHED
+  NO_CODE
+  HELD
+  IGNORED
+  REJECTED
+}
+
+model InboundMail {
+  id         String        @id @default(cuid())
+  messageId  String        @unique
+  recipient  String
+  sender     String
+  from       String
+  subject    String
+  bodyPlain  String
+  headers    Json
+  status     InboundStatus
+  note       String?
+  receivedAt DateTime      @default(now())
+
+  vouchers Voucher[]
+}
+
+enum OutboundKind {
+  VOUCHER
+  ADMIN_ALERT
+}
+
+enum OutboundStatus {
+  PENDING
+  SENDING
+  SENT
+  FAILED
+  // The assignment was revoked before the mail went out.
+  CANCELLED
+}
+
+model OutboundMail {
+  id        String         @id @default(cuid())
+  kind      OutboundKind
+  to        String
+  replyTo   String?
+  subject   String
+  text      String
+  status    OutboundStatus @default(PENDING)
+  attempts  Int            @default(0)
+  lastError String?
+  mailgunId String?
+  createdAt DateTime       @default(now())
+  claimedAt DateTime?
+  sentAt    DateTime?
+
+  assignmentId String?
+  assignment   Assignment? @relation(fields: [assignmentId], references: [id])
+
+  @@index([status, sentAt])
 }

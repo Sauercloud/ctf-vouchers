@@ -25,6 +25,9 @@
         disable_initial_admin_creation = false;
         admin_user = "admin";
         admin_password = "$__file{${config.sops.secrets.grafana_password.path}}";
+        # The former built-in default, kept so the existing database stays
+        # readable. No datasource stores a secret.
+        secret_key = "SW2YcwTIb9zpOOhoPsMm";
       };
     };
 

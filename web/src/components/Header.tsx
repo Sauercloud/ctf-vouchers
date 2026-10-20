@@ -2,67 +2,51 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const active = usePathname() === href;
+  return (
+    <Link
+      href={href}
+      className={`no-underline hover:text-fg ${active ? "text-fg" : "text-muted"}`}
+    >
+      {active ? `[${children}]` : children}
+    </Link>
+  );
+}
 
 export default function Header() {
   const { data: session, status } = useSession();
 
   return (
-    <header className="bg-gray-800 shadow-md">
-      <nav className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            className="text-2xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
-          >
-            CTF-Vouchers
-          </Link>
-          <Link
-            href="/about"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="/sequence"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Voucher Sequence
-          </Link>
-          {status === "authenticated" && (
-            <Link
-              href="/dashboard"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Dashboard
-            </Link>
-          )}
-        </div>
-        <div className="flex items-center gap-4">
-          {status === "loading" ? (
-            <div className="h-10 w-24 bg-gray-700 rounded-md animate-pulse"></div>
-          ) : session ? (
-            <div className="flex items-center gap-4">
-              <span className="text-gray-400 hidden sm:block">
-                {session.user?.name}
-              </span>
-              <button
-                onClick={() => signOut()}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => signIn("ctftime")}
-              className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-            >
-              Sign In
+    <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b border-rule py-4 font-mono text-sm">
+      <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
+        <Link href="/" className="font-semibold text-fg no-underline">
+          ctf-vouchers<span className="text-accent">/</span>40c3
+        </Link>
+        <NavLink href="/sequence">sequence</NavLink>
+        {status === "authenticated" && <NavLink href="/dashboard">dashboard</NavLink>}
+      </div>
+      <div className="text-muted">
+        {status === "loading" ? (
+          <span>…</span>
+        ) : session ? (
+          <span className="flex items-baseline gap-4">
+            <span>{session.user?.name}</span>
+            <button onClick={() => signOut()} className="cursor-pointer hover:text-fg">
+              sign out
             </button>
-          )}
-        </div>
-      </nav>
+          </span>
+        ) : (
+          <button
+            onClick={() => signIn("ctftime", { callbackUrl: "/dashboard" })}
+            className="cursor-pointer text-fg hover:text-accent"
+          >
+            sign in with ctftime →
+          </button>
+        )}
+      </div>
     </header>
   );
 }

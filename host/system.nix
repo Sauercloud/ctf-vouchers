@@ -6,6 +6,9 @@
 }:
 {
   boot.loader.grub.enable = true;
+  # Install for UEFI too, as the fallback loader (no NVRAM entry needed).
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
   boot.tmp.cleanOnBoot = true;
 
   networking.hostName = "ctf-vouchers";
@@ -17,6 +20,14 @@
   ];
 
   networking.nftables.enable = true;
+
+  # The server has 1 GB of RAM, next + postgres + grafana + prometheus need more.
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 2048;
+    }
+  ];
 
   system.stateVersion = "23.11";
 }

@@ -1,1 +1,3 @@
 result
+vouchers-backup-*.sql
+.decrypted~secrets.yaml

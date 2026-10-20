@@ -1,9 +1,53 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-bg: #0e0e0d;
+  --color-surface: #161614;
+  --color-fg: #e8e5dc;
+  --color-muted: #8f8b80;
+  --color-rule: #2c2b27;
+  --color-accent: #ff5a1f;
+  --color-ok: #8bc77a;
+  --color-warn: #e6b450;
+  --color-bad: #f0624d;
 
-body {
-  @apply bg-gray-900 text-gray-100;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    @apply bg-accent text-bg;
+  }
+
+  a {
+    @apply underline decoration-rule underline-offset-4 hover:decoration-accent;
+  }
+
+  input,
+  textarea {
+    @apply bg-bg border border-rule px-3 py-2 font-mono text-sm text-fg outline-none focus:border-accent;
+  }
+}
+
+@utility label {
+  @apply font-mono text-xs uppercase tracking-widest text-muted;
+}
+
+@utility btn {
+  @apply inline-block cursor-pointer border border-fg px-4 py-2 font-mono text-sm no-underline hover:border-accent hover:bg-accent hover:text-bg disabled:cursor-wait disabled:opacity-50;
+}
+
+@utility btn-sm {
+  @apply inline-block cursor-pointer border border-rule px-2 py-0.5 font-mono text-xs no-underline hover:border-accent hover:text-accent disabled:opacity-50;
 }
