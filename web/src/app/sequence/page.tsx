@@ -65,8 +65,11 @@ export default async function SequencePage() {
         <details className="text-sm text-muted">
           <summary className="cursor-pointer font-mono text-xs">how to verify</summary>
           <p className="mt-2">
-            Round <i>r</i> is a Fisher–Yates shuffle using <code>seedrandom(&quot;&lt;seed&gt;:&lt;r&gt;&quot;)</code>{" "}
-            over the CTFtime ids of all teams registered before the freeze, sorted ascending; each
+            Round <i>n</i> is a Fisher–Yates shuffle with{" "}
+            <code>rng = seedrandom(&quot;&lt;seed&gt;:&lt;n−1&gt;&quot;)</code> (round 1 uses{" "}
+            <code>&quot;&lt;seed&gt;:0&quot;</code>): for <i>i</i> from the last index down to 1, swap{" "}
+            <code>a[i]</code> with <code>a[floor(rng() · (i+1))]</code>. It runs over the CTFtime ids
+            of all teams registered before the freeze, sorted ascending; each
             keeps that place for the vouchers it asked for at the freeze. After them come teams
             registered later (<span className="font-mono text-warn">late</span>) and vouchers added
             by raising the request after the freeze (<span className="font-mono text-warn">extra</span>),

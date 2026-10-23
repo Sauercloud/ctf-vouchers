@@ -1,3 +1,4 @@
+import seedrandom from "seedrandom";
 import { describe, expect, it } from "vitest";
 import {
   nextSlot,
@@ -240,5 +241,22 @@ describe("nextSlot", () => {
       allocated.set(slot.teamId, (allocated.get(slot.teamId) ?? 0) + 1);
     }
     expect(walked).toEqual(run(rows, frozen, 1000));
+  });
+});
+
+// The algorithm as published on /sequence, implemented independently.
+describe("published verification instructions", () => {
+  it("match the order, with round n using the seed suffix n-1", () => {
+    const teams = Array.from({ length: 25 }, (_, i) => team(3000 - i * 11, 6));
+    const frozen = frozenIds(teams);
+    for (let n = 1; n <= 3; n++) {
+      const rng = seedrandom(`${SEED}:${n - 1}`);
+      const a = [...frozen].sort((x, y) => x - y);
+      for (let i = a.length - 1; i >= 1; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      expect(order(teams, frozen, n - 1)).toEqual(a);
+    }
   });
 });
