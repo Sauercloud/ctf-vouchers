@@ -11,7 +11,7 @@ const steps = [
   "Tell us how many people need a voucher and where to mail them.",
   `When the first vouchers arrive (expected ${berlinTime(config.voucherPhaseStart)}), the list is frozen and shuffled with a seed we publish. Teams that register later, or ask for more after that, go to the back of every round for the additional vouchers.`,
   `Each round, every team gets up to ${config.perRound} vouchers until it has what it asked for. Vouchers go out the moment we get them.`,
-  `Redeem within 24 hours and enter the address from our mail as the recipient of the new voucher. Pay right away, then reply to the mail as soon as possible.`,
+  `Redeem within 24 hours and enter the address from our mail as the recipient of the new voucher. Pay right away, then confirm as soon as possible by writing to the confirmation address from the mail.`,
 ];
 
 const rules = [

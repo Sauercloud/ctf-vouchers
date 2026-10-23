@@ -19,7 +19,7 @@ function status(a: {
   if (a.revokedAt) return { color: "text-muted", text: "given back" };
   if (a.replicatedAt) return { color: "text-ok", text: "came back as a new voucher, thanks" };
   if (a.confirmedAt) return { color: "text-warn", text: "confirmed, waiting for the new voucher" };
-  if (a.sentAt) return { color: "text-accent", text: "sent: redeem it, pay, reply to the mail" };
+  if (a.sentAt) return { color: "text-accent", text: "sent: redeem it, pay, confirm" };
   return { color: "text-muted", text: "queued for sending" };
 }
 
@@ -127,7 +127,7 @@ export default async function DashboardPage() {
                         </div>
                         {!a.confirmedAt && (
                           <div>
-                            <div className="label">redeemed it? reply to our mail or write to</div>
+                            <div className="label">redeemed it? confirm by writing to</div>
                             <div className="flex flex-wrap items-center gap-3">
                               <span className="break-all font-mono text-xs sm:text-sm">{confirmAddress(a.token)}</span>
                               <CopyButton value={confirmAddress(a.token)} />
