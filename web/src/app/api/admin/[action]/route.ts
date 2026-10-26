@@ -47,6 +47,12 @@ const handlers: Record<string, Handler> = {
       data: { held: false, heldReason: null },
     });
     if (v.parentAssignmentId) await markReplicated(tx, v.parentAssignmentId);
+    if (v.inboundMailId && !(await tx.voucher.count({ where: { inboundMailId: v.inboundMailId, held: true } }))) {
+      await tx.inboundMail.update({
+        where: { id: v.inboundMailId },
+        data: { status: "PROCESSED", note: "released by admin" },
+      });
+    }
   },
 
   async "voucher-hold"(tx, f) {

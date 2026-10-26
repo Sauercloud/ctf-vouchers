@@ -71,8 +71,14 @@ describe("senders", () => {
     expect(isAutoReply(headersOf([["Subject", "redeemed"]]))).toBe(false);
   });
 
+  // As Mailgun's EU MX added it to a real 40C3 replica mail.
+  const pass: [string, string] = [
+    "Authentication-Results",
+    'mxa.eu.mailgun.org; dkim=pass header.d=cccv.de header.s=presale header.b=r41x1KUh; spf=pass (domain cccv.de designates 167.235.195.219 as permitted sender) smtp.mailfrom="40c3-tickets@cccv.de"; dmarc=pass (dkim=pass domain=cccv.de; spf=pass domain=cccv.de) header.from=cccv.de',
+  ];
+  const ar = (value: string): [string, string] => ["Authentication-Results", value];
+
   it("trusts DKIM only when Mailgun passed it and all signatures are from the CCC", () => {
-    const pass: [string, string] = ["X-Mailgun-Dkim-Check-Result", "Pass"];
     expect(dkimTrusted(headersOf([...eml.headers, pass]), ["@cccv.de"])).toBe(true);
     expect(dkimTrusted(headersOf(eml.headers), ["@cccv.de"])).toBe(false);
     expect(
@@ -84,13 +90,30 @@ describe("senders", () => {
         ["@cccv.de"],
       ),
     ).toBe(false);
+    const failed = ar("mxa.eu.mailgun.org; dkim=fail header.d=cccv.de; spf=pass smtp.mailfrom=x@cccv.de");
+    expect(dkimTrusted(headersOf([...eml.headers, failed]), ["@cccv.de"])).toBe(false);
+    const other = ar("mxa.eu.mailgun.org; dkim=pass header.d=cccv.de; dkim=pass header.d=evil.de");
+    expect(dkimTrusted(headersOf([...eml.headers, other]), ["@cccv.de"])).toBe(false);
+    // the "dkim=pass" in the dmarc comment is not a result
+    const commentOnly = ar("mxa.eu.mailgun.org; dmarc=pass (dkim=pass header.d=cccv.de) header.from=cccv.de");
+    expect(dkimTrusted(headersOf([...eml.headers, commentOnly]), ["@cccv.de"])).toBe(false);
   });
 
-  it("does not trust a check result added by the sender", () => {
-    const pass: [string, string] = ["X-Mailgun-Dkim-Check-Result", "Pass"];
-    const fail: [string, string] = ["X-Mailgun-Dkim-Check-Result", "Fail"];
-    expect(dkimTrusted(headersOf([pass, ...eml.headers, fail]), ["@cccv.de"])).toBe(false);
-    expect(dkimTrusted(headersOf([pass, ...eml.headers, pass]), ["@cccv.de"])).toBe(false);
+  it("does not trust check results added by the sender", () => {
+    // Mailgun stopped adding this header, so it can only come from the sender
+    expect(dkimTrusted(headersOf([...eml.headers, ["X-Mailgun-Dkim-Check-Result", "Pass"]]), ["@cccv.de"])).toBe(false);
+    expect(dkimTrusted(headersOf([...eml.headers, ar("mx.evil.de; dkim=pass header.d=cccv.de")]), ["@cccv.de"])).toBe(false);
+    const forged = ar("mxa.eu.mailgun.org; dkim=pass header.d=cccv.de");
+    expect(dkimTrusted(headersOf([pass, ...eml.headers, forged]), ["@cccv.de"])).toBe(false);
+    expect(dkimTrusted(headersOf([forged, ...eml.headers, ar("mxb.mailgun.org; dkim=fail header.d=x.de")]), ["@cccv.de"])).toBe(false);
+  });
+
+  it("rejects signatures with a body length limit", () => {
+    const limited = eml.headers.map(([k, v]): [string, string] =>
+      k.toLowerCase() === "dkim-signature" ? [k, v.replace("s=presale;", "s=presale; l=100;")] : [k, v],
+    );
+    expect(limited).not.toEqual(eml.headers);
+    expect(dkimTrusted(headersOf([...limited, pass]), ["@cccv.de"])).toBe(false);
   });
 });
 

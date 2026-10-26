@@ -54,20 +54,43 @@ function dkimTag(sig: string, tag: string): string | undefined {
   return sig.match(new RegExp(`(?:^|;)\\s*${tag}=([^;]+)`))?.[1]?.replace(/\s+/g, "");
 }
 
-// Trust a mail from the CCC only if Mailgun verified DKIM and every DKIM
-// signature belongs to an allowlisted domain. A second check-result header
-// can only come from the sender, so that is never trusted.
+// Mailgun's inbound MX (mxa.eu.mailgun.org, mxb.mailgun.org, ...).
+const MAILGUN_AUTHSERV = /^mx[a-z0-9]*\.(?:eu\.)?mailgun\.org$/;
+
+// DKIM results from Mailgun's Authentication-Results header (RFC 8601), e.g.
+// "mxa.eu.mailgun.org; dkim=pass header.d=cccv.de header.s=presale; spf=pass".
+// Returns null unless there is exactly one such header: one the sender added
+// with a Mailgun authserv-id makes two, so it is never trusted.
+function mailgunDkimResults(headers: Headers) {
+  const parsed = (headers["authentication-results"] ?? []).map((value) =>
+    // comments like "(dkim=pass; spf=pass)" in the dmarc result are not results
+    value.replace(/\([^)]*\)/g, "").split(";").map((part) => part.trim()),
+  );
+  const mailgun = parsed.filter(([authserv]) => MAILGUN_AUTHSERV.test(authserv.split(/\s+/)[0].toLowerCase()));
+  if (mailgun.length !== 1) return null;
+  return mailgun[0]
+    .slice(1)
+    .map((part) => part.match(/^dkim=(\S+)(?:.*?\bheader\.d=(\S+))?/i))
+    .filter((m) => m !== null)
+    .map((m) => ({ result: m[1].toLowerCase(), domain: m[2]?.toLowerCase() }));
+}
+
+const inDomains = (d: string | undefined, domains: string[]) =>
+  d !== undefined && domains.some((dom) => d === dom || d.endsWith(`.${dom}`));
+
+// Trust a mail from the CCC only if Mailgun verified DKIM for allowlisted
+// domains only and every DKIM signature belongs to one. Signatures with a
+// body length limit (l=) are rejected, since text could be appended.
 export function dkimTrusted(headers: Headers, allowlist: readonly string[]) {
-  const results = headers["x-mailgun-dkim-check-result"] ?? [];
-  if (results.length !== 1 || results[0].trim().toLowerCase() !== "pass") return false;
   const domains = allowlist.filter((e) => e.startsWith("@")).map((e) => e.slice(1));
+  const results = mailgunDkimResults(headers);
+  if (!results?.length || !results.every((r) => r.result === "pass" && inDomains(r.domain, domains))) {
+    return false;
+  }
   const signatures = headers["dkim-signature"] ?? [];
   return (
     signatures.length > 0 &&
-    signatures.every((sig) => {
-      const d = dkimTag(sig, "d")?.toLowerCase();
-      return d !== undefined && domains.some((dom) => d === dom || d.endsWith(`.${dom}`));
-    })
+    signatures.every((sig) => inDomains(dkimTag(sig, "d")?.toLowerCase(), domains) && dkimTag(sig, "l") === undefined)
   );
 }
 

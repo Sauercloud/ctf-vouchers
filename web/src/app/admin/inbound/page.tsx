@@ -54,7 +54,16 @@ export default async function AdminInbound({
                 body={m.bodyPlain}
                 rawHeaders={m.headers as Headers}
               />
-              {m.status !== "PROCESSED" && (
+              {m.vouchers
+                .filter((v) => v.held)
+                .map((v) => (
+                  <div key={v.id} className="flex flex-wrap items-center gap-2 pt-1">
+                    <span className="font-mono">{v.code}</span>
+                    <span className="text-muted">held: {v.heldReason}</span>
+                    <ActionForm action="voucher-release" back={back} fields={{ id: v.id }} label="release" />
+                  </div>
+                ))}
+              {m.status !== "PROCESSED" && m.vouchers.length === 0 && (
                 <div className="pt-1">
                   <ActionForm action="inbound-code" back={back} fields={{ mailId: m.id }} label="enter code">
                     <input name="code" placeholder="voucher code" className={inputClass} />

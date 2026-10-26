@@ -5,7 +5,7 @@
 //     --text <body>    use this plain text body
 //     --code <code>    replace the code in the body with this one
 //     --from <addr>    override the From header
-//     --dkim           add "X-Mailgun-Dkim-Check-Result: Pass"
+//     --dkim           add Mailgun's "Authentication-Results: ...; dkim=pass" for cccv.de
 //     --url <url>      default http://localhost:3000/api/mailgun/inbound
 
 import { createHmac, randomBytes } from "node:crypto";
@@ -31,7 +31,9 @@ const code = opt("code");
 const bodyPlain = code ? mail.bodyPlain.replace(/\bCHAOS[A-Z0-9]{32}\b/g, code) : mail.bodyPlain;
 const from = opt("from") ?? (mail.from || "someone@example.org");
 const headers = [...mail.headers.filter(([k]) => k.toLowerCase() !== "from"), ["From", from]];
-if (args.includes("--dkim")) headers.push(["X-Mailgun-Dkim-Check-Result", "Pass"]);
+if (args.includes("--dkim")) {
+  headers.push(["Authentication-Results", "mxa.eu.mailgun.org; dkim=pass header.d=cccv.de header.s=presale"]);
+}
 
 const timestamp = String(Math.floor(Date.now() / 1000));
 const token = randomBytes(25).toString("hex");
