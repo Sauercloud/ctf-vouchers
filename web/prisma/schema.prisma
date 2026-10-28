@@ -36,6 +36,9 @@ model State {
   frozenAt      DateTime?
   frozenTeamIds Int[]
   seed          String?
+  // While set, no vouchers are assigned and no voucher mails are sent.
+  // Admin alerts still go out.
+  pausedAt      DateTime?
 }
 
 enum VoucherSource {

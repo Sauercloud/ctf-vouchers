@@ -1,5 +1,5 @@
 import { config } from "@/lib/config";
-import { distribute, lock, queueAdminAlert } from "@/lib/distribute";
+import { distribute, getState, lock, queueAdminAlert } from "@/lib/distribute";
 import { MailgunError, sendMail } from "@/lib/mailgun";
 import { prisma, type Tx } from "@/lib/prisma";
 import { isOverdue, isUnconfirmed } from "@/lib/rules";
@@ -74,15 +74,20 @@ export async function sendOutbox(now = new Date()) {
   let budget = config.dailySendLimit - sentToday;
   if (budget <= 0) return { sent: 0, deferred: true };
 
+  // While paused only admin alerts go out.
+  const paused = async () => !!(await getState(prisma)).pausedAt;
+
   // Voucher mails first (enum order), oldest first.
   const pending = await prisma.outboundMail.findMany({
-    where: { status: "PENDING" },
+    where: { status: "PENDING", ...((await paused()) && { kind: "ADMIN_ALERT" }) },
     orderBy: [{ kind: "asc" }, { createdAt: "asc" }],
     take: budget,
   });
 
   let sent = 0;
   for (const mail of pending) {
+    // Pausing during a run stops it before the next voucher mail.
+    if (mail.kind === "VOUCHER" && (await paused())) continue;
     // Claim the row so overlapping ticks never send twice. Mails of revoked
     // assignments are never sent.
     const claim = await prisma.outboundMail.updateMany({

@@ -35,7 +35,9 @@ Reply-To (`c-<token>@ctf-vouchers.de`).
 
 Admins handle exceptions on `/admin` (nginx basic auth): release held
 vouchers, enter codes from unparsed mails, mark confirmed, revoke/reassign,
-resend, ban teams.
+resend, ban teams. "pause distribution" stops assigning vouchers and sending
+voucher mails (admin alerts still go out, inbound mails are still processed)
+until it is resumed.
 
 ## Setup before deploying
 

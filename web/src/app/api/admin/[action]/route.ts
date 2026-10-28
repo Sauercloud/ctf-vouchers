@@ -1,6 +1,6 @@
 import { adminUser, sameOrigin } from "@/lib/admin";
 import { config } from "@/lib/config";
-import { cancelPendingMails, distribute, freeze, lock } from "@/lib/distribute";
+import { cancelPendingMails, distribute, freeze, getState, lock } from "@/lib/distribute";
 import { voucherMail } from "@/lib/mail-templates";
 import { extractCodes } from "@/lib/parse";
 import { prisma, type Tx } from "@/lib/prisma";
@@ -15,6 +15,18 @@ type Handler = (tx: Tx, f: (name: string) => string) => Promise<string | void>;
 const handlers: Record<string, Handler> = {
   async freeze(tx) {
     await freeze(tx);
+  },
+
+  // Stops assigning vouchers and sending voucher mails until resumed.
+  async pause(tx) {
+    const state = await getState(tx);
+    await tx.state.update({ where: { id: 1 }, data: { pausedAt: state.pausedAt ?? new Date() } });
+  },
+
+  // Free vouchers are assigned right away, queued mails go out with the next tick.
+  async resume(tx) {
+    await getState(tx);
+    await tx.state.update({ where: { id: 1 }, data: { pausedAt: null } });
   },
 
   async "team-ban"(tx, f) {

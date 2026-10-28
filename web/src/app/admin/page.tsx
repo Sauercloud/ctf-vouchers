@@ -40,6 +40,14 @@ export default async function AdminOverview({
         <p>
           Frozen: {state.frozenAt ? `${fmt(state.frozenAt)} (${state.frozenTeamIds.length} teams, seed ${state.seed})` : "no"}
         </p>
+        <p>
+          Distribution:{" "}
+          {state.pausedAt ? (
+            <span className="text-bad">paused since {fmt(state.pausedAt)} (no assigning, no voucher mails)</span>
+          ) : (
+            "running"
+          )}
+        </p>
         <p>Registered teams: {teams}</p>
         <p>
           Vouchers: {vouchers.map((v) => `${v._count} ${v.source.toLowerCase()}`).join(", ") || "none"} ·{" "}
@@ -55,6 +63,11 @@ export default async function AdminOverview({
         <div className="flex gap-2">
           {!state.frozenAt && (
             <ActionForm action="freeze" back="/admin" label="freeze & shuffle now" danger />
+          )}
+          {state.pausedAt ? (
+            <ActionForm action="resume" back="/admin" label="resume distribution" />
+          ) : (
+            <ActionForm action="pause" back="/admin" label="pause distribution" danger />
           )}
           <ActionForm action="tick" back="/admin" label="run tick now" />
         </div>

@@ -43,10 +43,10 @@ export async function allocatedCounts(tx: Tx) {
 }
 
 // Hands every free voucher to the next slot and queues the mail. Must run
-// inside a transaction holding `lock`.
+// inside a transaction holding `lock`. Does nothing while paused.
 export async function distribute(tx: Tx): Promise<number> {
   const state = await getState(tx);
-  if (!state.frozenAt || !state.seed) return 0;
+  if (!state.frozenAt || !state.seed || state.pausedAt) return 0;
 
   const vouchers = await tx.voucher.findMany({
     where: { held: false, assignments: { none: { revokedAt: null } } },
